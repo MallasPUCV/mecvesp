@@ -1,0 +1,561 @@
+/* ===== MODO OSCURO GLOBAL ===== */
+
+body {
+    background-color: #0e0e0e;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+}
+
+
+/* ===== BOTÓN CAMBIO DE MALLA ===== */
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 10px 0;
+}
+
+
+.malla-button {
+    background: linear-gradient(135deg, #2196f3, #1565c0);
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+
+.malla-button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+}
+
+
+/* ===== GRID ===== */
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+}
+
+
+/* ===== RAMOS ===== */
+
+.course {
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px #000;
+    cursor: pointer;
+    border-left: 5px solid #444;
+    color: #ffffff !important;
+    transition: transform 0.15s ease, filter 0.15s ease;
+
+    position: relative;
+    overflow: hidden;
+}
+
+
+.course:hover {
+    filter: brightness(1.15);
+    transform: scale(1.02);
+}
+
+
+/* ===== RAMOS APROBADOS ===== */
+
+.course.approved {
+    opacity: 0.95;
+    animation: approvedPop 0.25s ease-out;
+}
+
+
+/* ✔ CHECK VERDE */
+
+.course.approved::before {
+    content: "✔";
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #2ecc71;
+    text-shadow: 0 0 6px #2ecc71;
+    pointer-events: none;
+}
+
+
+/* ===== LÍNEA ROJA HORIZONTAL ===== */
+
+.course.approved::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+
+    background-color: #ff2b2b;
+
+    transform: translateY(-50%);
+
+    pointer-events: none;
+
+    border-radius: 3px;
+
+    box-shadow: 0 0 6px #ff2b2b;
+
+    z-index: 5;
+}
+
+
+/* ===== ANIMACIÓN APROBADO ===== */
+
+@keyframes approvedPop {
+
+    0% {
+        transform: scale(0.95);
+        filter: brightness(0.8);
+    }
+
+    60% {
+        transform: scale(1.04);
+        filter: brightness(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+}
+
+
+/* ===== BLOQUEADOS ===== */
+
+.course.locked {
+    background-color: #000000 !important;
+    border-left: 5px solid #333 !important;
+    color: #777 !important;
+
+    cursor: not-allowed;
+
+    opacity: 0.85;
+}
+
+
+/* ===== SEMESTRES ===== */
+
+.semester {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    background-color: #121212;
+
+    border: 1px solid #222;
+
+    padding: 8px;
+
+    border-radius: 6px;
+}
+
+
+.semester h2 {
+    text-align: center;
+
+    margin-bottom: 5px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   COLORES POR SIGLA
+   ========================================================= */
+
+
+/* ===== MAT - AZUL ===== */
+
+.course.mat {
+    background-color: #1e3a5f !important;
+
+    border-left: 6px solid #2196f3;
+}
+
+
+/* ===== ICM - VERDE ===== */
+
+.course.icm {
+    background-color: #1f4d3a !important;
+
+    border-left: 6px solid #4caf50;
+}
+
+
+/* ===== ING - AMARILLO ===== */
+
+.course.ing {
+    background-color: #5c4b1e !important;
+
+    border-left: 6px solid #f1c40f;
+}
+
+
+/* ===== FORMACIÓN - ROSADO ===== */
+
+.course.rosado {
+    background-color: #6b2b4a !important;
+
+    border-left: 6px solid #ff6fae;
+}
+
+
+/* ===== OPT - TURQUESA ===== */
+
+.course.opt {
+    background-color: #1f5e5a !important;
+
+    border-left: 6px solid #1abc9c;
+}
+
+
+/* =========================================================
+   BLOQUEADOS POR SIGLA
+   ========================================================= */
+
+.course.mat.locked,
+.course.icm.locked,
+.course.ing.locked,
+.course.rosado.locked,
+.course.opt.locked {
+
+    background-color: #000000 !important;
+
+    border-left-color: #333 !important;
+
+    color: #777 !important;
+}
+
+
+/* =========================================================
+   APROBADOS POR SIGLA
+   ========================================================= */
+
+.course.mat.approved,
+.course.icm.approved,
+.course.ing.approved,
+.course.rosado.approved,
+.course.opt.approved {
+
+    border-left-color: #2ecc71 !important;
+}
+
+
+/* =========================================================
+   BARRA DE PROGRESO
+   ========================================================= */
+
+#progress-container {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    max-width: 650px;
+
+    margin: 25px auto 35px auto;
+
+    text-align: center;
+}
+
+
+#progress-text {
+
+    margin-bottom: 6px;
+
+    font-weight: bold;
+
+    font-size: 18px;
+
+    color: #ffffff;
+}
+
+
+#credits-text {
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+
+    color: #cccccc;
+}
+
+
+#progress-bar {
+
+    width: 100%;
+
+    height: 20px;
+
+    background-color: #222;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    border: 1px solid #333;
+}
+
+
+#progress-fill {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: linear-gradient(
+        90deg,
+        #2ecc71,
+        #27ae60
+    );
+
+    transition: width 0.3s ease;
+}
+
+
+/* =========================================================
+   PRERREQUISITOS
+   ========================================================= */
+
+.prereq-button {
+
+    position: absolute;
+
+    top: 5px;
+
+    right: 6px;
+
+    width: 24px;
+
+    height: 24px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    z-index: 30;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: transform 0.15s ease;
+}
+
+
+.prereq-button:hover {
+    transform: scale(1.15);
+}
+
+
+/* ===== CONTENEDOR DE PRERREQUISITOS ===== */
+
+.prereq-container {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 8px 8px 5px 8px;
+
+    border-top: 1px solid #444;
+
+    text-align: left;
+
+    box-sizing: border-box;
+
+    background-color: rgba(0,0,0,0.25);
+
+    border-radius: 4px;
+}
+
+
+/* ===== TÍTULO PRERREQUISITOS ===== */
+
+.prereq-title {
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #ffffff;
+
+    margin-bottom: 6px;
+}
+
+
+/* ===== CADA PRERREQUISITO ===== */
+
+.prereq-item {
+
+    font-size: 12px;
+
+    line-height: 1.3;
+
+    margin: 4px 0;
+
+    padding: 3px 0;
+
+    font-weight: bold;
+}
+
+
+/* ===== PRERREQUISITO APROBADO ===== */
+
+.prereq-approved {
+    color: #2ecc71 !important;
+}
+
+
+/* ===== PRERREQUISITO NO APROBADO ===== */
+
+.prereq-not-approved {
+    color: #e74c3c !important;
+}
+
+
+/* =========================================================
+   SEMESTRE CLICKEABLE
+   ========================================================= */
+
+.semester-title {
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        transform 0.15s ease,
+        color 0.15s ease;
+}
+
+
+.semester-title:hover {
+
+    transform: scale(1.08);
+
+    color: #2ecc71 !important;
+}
+
+
+.semester-title:active {
+
+    transform: scale(0.98);
+}
+
+
+/* =========================================================
+   MÓVIL
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+
+    /* ===== GRID EN MÓVIL ===== */
+
+    #grid {
+
+        display: grid !important;
+
+        grid-template-columns: 1fr !important;
+
+        width: 100% !important;
+
+        max-width: 100vw !important;
+
+        margin: 0 auto !important;
+
+        padding: 10px 12px 20px 12px !important;
+
+        box-sizing: border-box;
+
+        gap: 20px !important;
+    }
+
+
+    /* ===== SEMESTRES ===== */
+
+    .semester {
+
+        width: 100% !important;
+
+        max-width: 420px !important;
+
+        margin: 0 auto !important;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ===== RAMOS ===== */
+
+    .course {
+
+        font-size: 14px !important;
+
+        line-height: 1.35 !important;
+
+        text-align: center !important;
+
+        word-break: normal;
+
+        overflow-wrap: anywhere;
+
+        hyphens: auto;
+    }
+
+
+    /* ===== PRERREQUISITOS ===== */
+
+    .prereq-container {
+        text-align: left;
+    }
+
+}
